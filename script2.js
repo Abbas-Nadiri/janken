@@ -8,7 +8,7 @@ function randomChoice(array) {
 
 }
 
-function spellCheck(choice) {
+function checkSpelling(choice) {
 
     if (choice !== "paper" && choice !== "scissors" && choice !== "rock") {
 
@@ -41,7 +41,7 @@ function playRound() {
 
     } else {
 
-        if (spellCheck(player) === false) {
+        if (checkSpelling(player) === false) {
 
             alert(`YOU LOSE, TONEY. You picked ${player} but computer picked ${computer}.`);
             loss++;
@@ -52,7 +52,7 @@ function playRound() {
 }
 
 function playGame() {
-    while (win < 3 && loss < 3) {
+    while (win < 3   && loss < 3) {
         playRound()
     }
     if (win === 3) {
