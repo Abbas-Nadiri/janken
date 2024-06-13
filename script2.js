@@ -8,28 +8,14 @@ function randomChoice(array) {
 
 }
 
-function checkSpelling(choice) {
+function playRound(choice) {
 
-    if (choice !== "paper" && choice !== "scissors" && choice !== "rock") {
-
-        alert("Please enter a valid choice.");
-
-    } else {
-
-        return false;
-
-    }
-}
-
-function playRound() {
-
-    let player = prompt("Make your choice: rock, paper, or scissors?").toLowerCase();
+    let player = choice;
     let computer = randomChoice(aiArray);
 
     if (player === computer) {
 
         alert(`Draw! You both picked ${player}.`);
-        console.log(`You: ${win} | Computer: ${loss}`);
 
     } else if (player === "rock" && computer === "scissors" ||
                player === "paper" && computer === "rock" ||
@@ -37,39 +23,62 @@ function playRound() {
 
         alert(`You win! You picked ${player} and computer picked ${computer}.`);
         win++;
-        console.log(`You: ${win} | Computer: ${loss}`);
 
     } else {
 
-        if (checkSpelling(player) === false) {
-
-            alert(`YOU LOSE, TONEY. You picked ${player} but computer picked ${computer}.`);
-            loss++;
-            console.log(`You: ${win} | Computer: ${loss}`);
-        }
-
+        alert(`YOU LOSE, TONEY. You picked ${player} but computer picked ${computer}.`);
+        loss++;
     }
 }
 
-function playGame() {
-    while (win < 3   && loss < 3) {
-        playRound()
-    }
-    if (win === 3) {
-        alert("You win!");
-    } else if (loss === 3) {
-        alert("You lose...");
-    }
-}
-/*playGame();*/
+let body = document.querySelector("body");
 
 let rock = document.createElement("button");
 rock.textContent = "Rock";
+
 let paper = document.createElement("button");
 paper.textContent = "Paper";
+
 let scissors = document.createElement("button");
 scissors.textContent = "Scissors";
-let body = document.querySelector("body");
+
+let reset = document.createElement("button");
+reset.textContent = "Reset"
+
 body.append(rock);
 body.append(paper);
 body.append(scissors);
+body.append(reset);
+let div = document.createElement("div");
+div.textContent = `You: ${win} | Computer: ${loss}`
+body.append(div);
+
+function customClickEvent(buttonChoice) {
+    if (win === 5 || loss === 5) {
+        alert("Reset to play again.");
+    } else {
+        playRound(buttonChoice);
+        div.textContent = `You: ${win} | Computer: ${loss}`;
+        if (win === 5) {
+            alert("You win!");
+        } else if (loss === 5) {
+            alert("You lose...");
+        }
+    }
+}
+
+rock.addEventListener("click", () => {
+    customClickEvent("rock");
+});
+paper.addEventListener("click", () => {
+    customClickEvent("paper");
+});
+scissors.addEventListener("click", () => {
+    customClickEvent("scissors");
+});
+
+reset.addEventListener("click", () => {
+    win = 0;
+    loss = 0;
+    div.textContent = `You: ${win} | Computer: ${loss}`;
+})
