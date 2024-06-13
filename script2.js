@@ -61,4 +61,15 @@ function playGame() {
         alert("You lose...");
     }
 }
-playGame();
+/*playGame();*/
+
+let rock = document.createElement("button");
+rock.textContent = "Rock";
+let paper = document.createElement("button");
+paper.textContent = "Paper";
+let scissors = document.createElement("button");
+scissors.textContent = "Scissors";
+let body = document.querySelector("body");
+body.append(rock);
+body.append(paper);
+body.append(scissors);
